@@ -15,6 +15,10 @@ dotenv.config();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
+
+app.options('*', cors()); // 允许所有路由的 OPTIONS 请求
+
+  
 app.use('/posts', postRouters);
 app.use('/user',userRouters);
 
@@ -26,7 +30,7 @@ app.get('/',(req,res)=>{
 const PORT = process.env.PORT || 5555;
 
 mongoose.connect(process.env.CONNECTION_URL)
-.then(()=>console.log(`server running on port ${PORT}`))
+.then(console.log(`server running on port ${PORT}`))
 .catch(((error)=>console.log(error.message)));
 
 export default app;

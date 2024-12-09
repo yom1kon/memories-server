@@ -3,6 +3,10 @@ import jwt from 'jsonwebtoken';
 
 
 const auth = async(req, res, next) => {
+    if (req.method === 'OPTIONS') {
+        return next(); // 跳过 OPTIONS 请求的认证
+      }
+    
     try {
         // 检查 Authorization 是否存在
     const authHeader = req.headers.authorization;
