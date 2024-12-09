@@ -26,6 +26,7 @@ app.get('/',(req,res)=>{
 const PORT = process.env.PORT || 5555;
 
 mongoose.connect(process.env.CONNECTION_URL)
-.then(()=>app.listen(PORT, ()=>console.log(`server running on port ${PORT}`)))
+.then(()=>console.log(`server running on port ${PORT}`))
 .catch(((error)=>console.log(error.message)));
 
+export default app;
