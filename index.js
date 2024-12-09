@@ -14,8 +14,15 @@ dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
-app.use(cors());
-
+// app.use(cors());
+const corsOptions = {
+    origin: 'https://memories-five-psi.vercel.app/', // 替换为你的前端 URL
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'], // 明确允许的 HTTP 方法
+    allowedHeaders: ['Content-Type', 'Authorization'], // 允许的请求头
+    credentials: true // 如果需要传递认证信息
+  };
+  
+  app.use(cors(corsOptions));
 app.options('*', cors()); // 允许所有路由的 OPTIONS 请求
 
   
