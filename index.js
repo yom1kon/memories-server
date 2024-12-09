@@ -22,9 +22,9 @@ const corsOptions = {
   origin: (origin, callback) => {
     // 定义允许的前端 URL 列表
     const whitelist = [
-      'https://memories-five-psi.vercel.app/',  // 主前端域名
-      'https://memories-git-main-emilys-projects-a73dda8a.vercel.app/', // 测试域名
-      'https://memories-jppf0skdy-emilys-projects-a73dda8a.vercel.app/' // 其他子域名
+      'https://memories-five-psi.vercel.app',  // 主前端域名
+      'https://memories-git-main-emilys-projects-a73dda8a.vercel.app', // 测试域名
+      'https://memories-jppf0skdy-emilys-projects-a73dda8a.vercel.app' // 其他子域名
     ];
 
     if (whitelist.indexOf(origin) !== -1 || !origin) {
@@ -53,6 +53,12 @@ app.get('/',(req,res)=>{
 })
 // const CONNECTION_URL = 'mongodb+srv://mernmemories:mernmemories123@cluster0.e5agvuw.mongodb.net/';
 
+// 全局错误处理
+app.use((err, req, res, next) => {
+    console.error('Error:', err.message);
+    res.status(500).json({ message: 'Internal Server Error' });
+  });
+  
 const PORT = process.env.PORT || 5555;
 
 mongoose.connect(process.env.CONNECTION_URL)
